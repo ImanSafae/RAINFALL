@@ -1,0 +1,6 @@
+Upon first logging in to the RainFall VM and its first level (level0), we find in the home directory a binary called level0.
+When executing it, it causes a segmentation fault, but if we give it arguments, it simply displays "No !".
+We reverse engineer it using Ghidra and obtain the source code in C, thus finding out it only contains a main function. The function takes the first argument given in the command line, and checks whether it is 423. If it is, it sends a prompt waiting for a command, with the file creator's privileges (which is level1). Otherwise, it displays "No !".
+We now know enough to exploit this breach: we get the prompt and send it:
+cat /home/user/level1/.pass
+And this is how we get the first pass for level1.
